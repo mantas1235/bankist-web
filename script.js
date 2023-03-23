@@ -1,13 +1,18 @@
 "use strict"
 
-//////////////////////////////////////////////////////////////////
 
-// Modal window
-
+const header = document.querySelector(".header")
+const message = document.createElement("div")
 const modal = document.querySelector('.modal');
 const overlay = document.querySelector('.overlay');
 const btnCloseModal = document.querySelector('.btn--close-modal');
 const btnsOpenModal = document.querySelectorAll('.btn--show-modal');
+const btnScrollTo = document.querySelector(".btn--scroll-to")
+const section1 = document.querySelector("#section--1")
+//////////////////////////////////////////////////////////////////
+
+// Modal window
+
 
 
 const openModal = function (e) {
@@ -23,9 +28,6 @@ const closeModal = function () {
 
 btnsOpenModal.forEach(btn => btn.addEventListener('click', openModal))
 
-
-
-
 btnCloseModal.addEventListener('click', closeModal);
 overlay.addEventListener('click', closeModal);
 
@@ -34,11 +36,10 @@ document.addEventListener('keydown', function (e) {
         closeModal();
     }
 })
+/////////////////////////////////////////////////////
 
-const header = document.querySelector(".header")
+//cookie message
 
-
-const message = document.createElement("div")
 message.classList.add("cookie-message")
 message.textContent = "We use cookies to improve functionality and analytics"
 
@@ -53,17 +54,50 @@ message.style.width = "120%"
 
 message.style.height = Number.parseFloat(getComputedStyle(message).height, 10) + 30 + "px"
 
-const btnScrollTo = document.querySelector(".btn--scroll-to")
-const section1 = document.querySelector("#section--1")
+/////////////////////////////////////////////////////
+
+//BTN "LEARN MORE" SCROLL
 
 btnScrollTo.addEventListener("click", function (e) {
     // e.preventDefault()
-    const s1coords = section1.getBoundingClientRect()
-    console.log(s1coords);
+    // const s1coords = section1.getBoundingClientRect()
+    // console.log(s1coords);
     console.log(e.target.getBoundingClientRect());
-
     section1.scrollIntoView({ behavior: "smooth" })
+})
 
+/////////////////////////////////////////////////////
+
+
+//SMOOTH PAGE NAVIGATION
+
+// document.querySelectorAll(".nav__link").forEach(function (el) {
+//     el.addEventListener("click", function (e) {
+//         e.preventDefault()
+
+//         const id = this.getAttribute('href')
+//         console.log(id);
+
+//         document.querySelector(id).scrollIntoView({ behavior: "smooth" })
+//     })
+// })
+
+//1. add event listener to common parent element
+//2 determinate what element originated the event
+
+document.querySelector(".nav__links").addEventListener("click", function (e) {
+    console.log(e.target);
+
+    //Maching strategy
+    if (e.target.classList.contains("nav__link")) {
+        e.preventDefault()
+
+        const id = e.target.getAttribute('href')
+        console.log(id);
+
+        document.querySelector(id).scrollIntoView({ behavior: "smooth" })
+
+    }
 
 })
 
@@ -225,7 +259,7 @@ btnScrollTo.addEventListener("click", function (e) {
 //     console.log(s1coords);
 
 
-//here you can see possition of current scroll on page 
+//here you can see possition of current scroll on page
 
 // console.log(e.target.getBoundingClientRect());
 
@@ -283,39 +317,72 @@ btnScrollTo.addEventListener("click", function (e) {
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-//eventListeners 
+//eventListeners
 
 
 
 
 
-const h1 = document.querySelector("h1")
+// const h1 = document.querySelector("h1")
 
-// h1.addEventListener("mouseenter", function (e) {
-//     alert("addEventListener: Great You are reading the heading :D")
-// })
+// // h1.addEventListener("mouseenter", function (e) {
+// //     alert("addEventListener: Great You are reading the heading :D")
+// // })
 
-//another way to attach event listener
+// //another way to attach event listener
 
 
-// h1.onmouseenter = function (e) {
+// // h1.onmouseenter = function (e) {
+// //     alert("addEventListener: Great You are reading the heading!!! :D")
+// // }
+
+// //addEventListener is better because we can add multiple event listeners and we can do this
+
+// const alertH1 = function (e) {
 //     alert("addEventListener: Great You are reading the heading!!! :D")
+//     //and we can remove event listener
+
+//     // h1.removeEventListener("mouseenter", alertH1)
+
+
 // }
 
-//addEventListener is better because we can add multiple event listeners and we can do this 
+// h1.addEventListener("mouseenter", alertH1)
 
-const alertH1 = function (e) {
-    alert("addEventListener: Great You are reading the heading!!! :D")
-    //and we can remove event listener
+// // we can remove in certain time pass
 
-    // h1.removeEventListener("mouseenter", alertH1)
+// setTimeout(() => h1.removeEventListener("mouseenter", alertH1), 3000
+// )
 
 
-}
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-h1.addEventListener("mouseenter", alertH1)
+//EVENT PROPOGATION
 
-// we can remove in certain time pass
+// rgb(255,255,255)
 
-setTimeout(() => h1.removeEventListener("mouseenter", alertH1), 3000
-)
+
+// const randomInt = (min, max) =>
+//     Math.floor(Math.random() * (max - min + 1) + min)
+
+// const randomColor = () => `rgb(${randomInt(0, 255)},${randomInt(0, 255)},${randomInt(0, 255)})`
+
+
+// console.log(randomColor(0, 255));
+
+
+// document.querySelector(".nav__link").addEventListener("click", function (e) {
+//     this.style.backgroundColor = randomColor()
+//     console.log("link", e.target);
+
+//     //stop propagation
+//     //e.stopPropagation()
+// })
+// document.querySelector(".nav__links").addEventListener("click", function (e) {
+//     this.style.backgroundColor = randomColor()
+//     console.log("container", e.target);
+// })
+// document.querySelector(".nav").addEventListener("click", function (e) {
+//     this.style.backgroundColor = randomColor()
+//     console.log("nav", e.target);
+// })
