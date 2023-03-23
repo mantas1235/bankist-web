@@ -91,3 +91,67 @@ document.querySelector(".btn--close-cookie").addEventListener("click", function 
 })
 
 
+//styles 
+
+//this is give us inline style
+
+message.style.backgroundColor = "#37383d"
+message.style.width = "120%"
+
+
+//we cant get to see styles directly if we didint use it before in inline styles
+console.log(message.style.height);
+console.log(message.style.backgroundColor);
+
+//but we can see styles properties we can use with this
+
+console.log(getComputedStyle(message).color);
+
+message.style.height = Number.parseFloat(getComputedStyle(message).height, 10) + 30 + "px"
+
+
+document.documentElement.style.setProperty("--color-primary", "orangered")
+
+
+//ATRIBUTES
+
+//atributes are all class, id, src, alt,and etc
+
+const logo = document.querySelector(".nav__logo")
+
+console.log(logo.alt);
+console.log(logo.src);
+console.log(logo.className);
+
+
+//we can set atributes
+
+logo.alt = 'beautiful logo'
+
+//we can set new atributes like this
+
+logo.setAttribute("company", "Bankist")
+
+//we can get realitives and absolute atributes
+
+//realitive
+console.log(logo.getAttribute("src"));
+
+//absolute
+console.log(logo.src);
+
+
+//DATA atributes
+
+console.log(logo.dataset.versionNumber);
+
+
+//CLASSES
+
+// logo.classList.add()
+// logo.classList.remove()
+// logo.classList.toggle()
+// logo.classList.contains() // not includes
+
+// //dont use because it change all classes
+// logo.className = "mantas"
