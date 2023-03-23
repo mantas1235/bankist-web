@@ -53,6 +53,21 @@ message.style.width = "120%"
 
 message.style.height = Number.parseFloat(getComputedStyle(message).height, 10) + 30 + "px"
 
+const btnScrollTo = document.querySelector(".btn--scroll-to")
+const section1 = document.querySelector("#section--1")
+
+btnScrollTo.addEventListener("click", function (e) {
+    // e.preventDefault()
+    const s1coords = section1.getBoundingClientRect()
+    console.log(s1coords);
+    console.log(e.target.getBoundingClientRect());
+
+    section1.scrollIntoView({ behavior: "smooth" })
+
+
+})
+
+
 ///////////////////////////////////////////////////////////////////////////
 
 
@@ -201,46 +216,106 @@ message.style.height = Number.parseFloat(getComputedStyle(message).height, 10) +
 
 
 
-const btnScrollTo = document.querySelector(".btn--scroll-to")
-const section1 = document.querySelector("#section--1")
+// const btnScrollTo = document.querySelector(".btn--scroll-to")
+// const section1 = document.querySelector("#section--1")
 
-btnScrollTo.addEventListener("click", function (e) {
-    // e.preventDefault()
-    const s1coords = section1.getBoundingClientRect()
-    console.log(s1coords);
-
-
-    //here you can see possition of current scroll on page 
-
-    console.log(e.target.getBoundingClientRect());
-
-    //scrolling
-
-    // window.scrollTo(s1coords.left + window.pageXOffset, s1coords.top + window.pageYOffset)
+// btnScrollTo.addEventListener("click", function (e) {
+//     // e.preventDefault()
+//     const s1coords = section1.getBoundingClientRect()
+//     console.log(s1coords);
 
 
-    // window.scrollTo({
-    //     left: s1coords.left + window.pageXOffset, top: s1coords.top + window.pageYOffset,
-    //     behavior: "smooth"
-    // })
+//here you can see possition of current scroll on page 
+
+// console.log(e.target.getBoundingClientRect());
+
+//scrolling
+
+// window.scrollTo(s1coords.left + window.pageXOffset, s1coords.top + window.pageYOffset)
 
 
-    //modern way to do smooth scrolling
+// window.scrollTo({
+//     left: s1coords.left + window.pageXOffset, top: s1coords.top + window.pageYOffset,
+//     behavior: "smooth"
+// })
 
-    section1.scrollIntoView({ behavior: "smooth" })
+
+//modern way to do smooth scrolling
+
+//     section1.scrollIntoView({ behavior: "smooth" })
 
 
 
 
-})
+// })
 
 
 // you can see x and y position of page
 
-console.log("current scroll (X/Y)", window.pageXOffset, pageYOffset);
+// console.log("current scroll (X/Y)", window.pageXOffset, pageYOffset);
 
-//also you can see height and width of the page to see you need to do this
+// also you can see height and width of the page to see you need to do this
 
 
-console.log("Height/width viewport", document.documentElement.clientHeight, document.documentElement.clientWidth);
+// console.log("Height/width viewport", document.documentElement.clientHeight, document.documentElement.clientWidth);
 
+
+
+
+//experiment with lesson
+
+// const newBtn = document.createElement("button")
+// const navigationLinks = document.querySelector(".nav__links")
+// const footer = document.querySelector(".footer")
+
+
+// newBtn.innerHTML = "<button class = 'btn btn__scroll-to-footer'>Go to contacts</button>"
+
+// navigationLinks.append(newBtn)
+
+// newBtn.style.border = "none"
+
+// newBtn.addEventListener("click", function name(e) {
+//     footer.scrollIntoView({ behavior: "smooth" })
+// })
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+//eventListeners 
+
+
+
+
+
+const h1 = document.querySelector("h1")
+
+// h1.addEventListener("mouseenter", function (e) {
+//     alert("addEventListener: Great You are reading the heading :D")
+// })
+
+//another way to attach event listener
+
+
+// h1.onmouseenter = function (e) {
+//     alert("addEventListener: Great You are reading the heading!!! :D")
+// }
+
+//addEventListener is better because we can add multiple event listeners and we can do this 
+
+const alertH1 = function (e) {
+    alert("addEventListener: Great You are reading the heading!!! :D")
+    //and we can remove event listener
+
+    // h1.removeEventListener("mouseenter", alertH1)
+
+
+}
+
+h1.addEventListener("mouseenter", alertH1)
+
+// we can remove in certain time pass
+
+setTimeout(() => h1.removeEventListener("mouseenter", alertH1), 3000
+)
