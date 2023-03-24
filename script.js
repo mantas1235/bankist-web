@@ -1,7 +1,6 @@
 "use strict"
-
-
 const header = document.querySelector(".header")
+
 const message = document.createElement("div")
 const modal = document.querySelector('.modal');
 const overlay = document.querySelector('.overlay');
@@ -186,8 +185,64 @@ nav.addEventListener("mouseover", handleHover.bind(0.5))
 
 nav.addEventListener("mouseout", handleHover.bind(1))
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//NAVIGATION STICKY
+
+//one way to do a sticky navigation but this is bad method because it takes lot of memory using window.scrool method
+
+// const initinialCoords = section1.getBoundingClientRect()
+
+// window.addEventListener("scroll", function (e) {
+//     console.log(window.scrollY);
+
+//     if (this.window.scrollY > initinialCoords.top) nav.classList.add('sticky')
+//     else (nav.classList.remove('sticky'))
+// })
 
 
+//much better method is INTERSECTION OBSERVER API
+
+//this API allows our code to observe changes to certain target element intersects another element or intersects viewpoint
+
+
+
+// const observerCallback = function (entries, observer) {
+//     entries.forEach(entry => {
+//         console.log(entry);
+//     })
+// }
+
+// const observerOptions = {
+//     root: null, //element that target intersecting 
+//     threshold: [0, 0.2] //procentage of intersection that observer callback will be called
+
+// }
+
+// const observer = new IntersectionObserver(observerCallback, observerOptions)
+// observer.observe(section1);// watch this element target
+
+const navHeight = nav.getBoundingClientRect().height
+
+
+const stickyNav = function (entries) {
+    const [entry] = entries
+
+    console.log(entry);
+
+    if (!entry.isIntersecting) nav.classList.add("sticky")
+    else (nav.classList.remove("sticky"))
+
+}
+
+const headerObserver = new IntersectionObserver(stickyNav, {
+    root: null,
+    threshold: 0,
+    rootMargin: `-${navHeight}px`
+});
+
+
+headerObserver.observe(header)
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 //LESSONS
