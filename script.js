@@ -99,11 +99,52 @@ document.querySelector(".nav__links").addEventListener("click", function (e) {
 
     }
 
-})
+});
 
 
 ///////////////////////////////////////////////////////////////////////////
 
+//TAB COMPONENTS
+
+const tabs = document.querySelectorAll(".operations__tab");
+const tabsContainer = document.querySelector(".operations__tab-container");
+const tabsContent = document.querySelectorAll(".operations__content");
+
+
+
+tabsContainer.addEventListener("click", function (e) {
+    const clicked = e.target.closest(".operations__tab");
+    console.log(clicked);
+
+    //Guard clause
+    if (!clicked) return
+
+    //Active tab
+
+    tabs.forEach(t => t.classList.remove("operations__tab--active"))
+
+    tabsContent.forEach(tc => tc.classList.remove("operations__content--active"))
+
+    clicked.classList.add("operations__tab--active")
+
+    //Active content area
+    document.querySelector(`.operations__content--${clicked.dataset.tab}`).classList.add("operations__content--active")
+
+
+})
+
+
+
+
+
+
+
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//LESSONS
 
 //select html document element
 
@@ -394,41 +435,41 @@ document.querySelector(".nav__links").addEventListener("click", function (e) {
 
 //going downwords child
 
-const h1 = document.querySelector("h1")
+// const h1 = document.querySelector("h1")
 
-console.log(h1.querySelectorAll(".highlight"));
+// console.log(h1.querySelectorAll(".highlight"));
 
-console.log(h1.childNodes);
+// console.log(h1.childNodes);
 
-console.log(h1.children);
+// console.log(h1.children);
 
-h1.firstElementChild.style.color = "white"
-h1.lastElementChild.style.color = "orangered"
+// h1.firstElementChild.style.color = "white"
+// h1.lastElementChild.style.color = "orangered"
 
-//going upwords: parents
-console.log(h1.parentNode);
-console.log(h1.parentElement);
-
-
-//recieve query string just like queryselector
-h1.closest(".header").style.background = "var(--gradient-secondary)"
+// //going upwords: parents
+// console.log(h1.parentNode);
+// console.log(h1.parentElement);
 
 
-//queryselector finds childrens ant closest method finds parents of the element
+// //recieve query string just like queryselector
+// h1.closest(".header").style.background = "var(--gradient-secondary)"
 
 
-//going sideways: siblings
-
-console.log(h1.previousElementSibling);
-console.log(h1.nextElementSibling);
+// //queryselector finds childrens ant closest method finds parents of the element
 
 
-console.log(h1.previousSibling);
-console.log(h1.nextSibling);
+// //going sideways: siblings
 
-//making array and playing with siblings
+// console.log(h1.previousElementSibling);
+// console.log(h1.nextElementSibling);
 
-[...h1.parentElement.children].forEach(function (el) {
-    if (el !== h1) el.style.transform = "scale(0.5)"
-})
+
+// console.log(h1.previousSibling);
+// console.log(h1.nextSibling);
+
+// //making array and playing with siblings
+
+// [...h1.parentElement.children].forEach(function (el) {
+//     if (el !== h1) el.style.transform = "scale(0.5)"
+// })
 
