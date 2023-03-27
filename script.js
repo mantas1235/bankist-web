@@ -268,7 +268,7 @@ const sectionObserver = new IntersectionObserver(revielSection, {
 
 allSections.forEach(section => {
     sectionObserver.observe(section)
-    // section.classList.add("section--hidden")
+    section.classList.add("section--hidden")
 });
 
 
