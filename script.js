@@ -320,6 +320,22 @@ const maxSlide = slides.length
 // slider.style.transform = 'scale(0.4) translateX(-800px)'
 // slider.style.overflow = 'visible'
 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//dots activate function
+
+const activateDot = function (slide) {
+    document.querySelectorAll(".dots__dot").forEach((dot) => dot.classList.remove("dots__dot--active"))
+
+    document.querySelector(`.dots__dot[data-slide="${slide}"]`).classList.add("dots__dot--active")
+
+
+};
+
+
+
+
+
 
 const goToSlide = function (slide) {
     slides.forEach((s, i) => (s.style.transform = `translateX(${100 * (i - slide)}%)`)
@@ -339,6 +355,8 @@ const nextSlide = function () {
 
     goToSlide(currentSlide)
 
+    activateDot(currentSlide)
+
 }
 
 const prevSlide = function () {
@@ -349,12 +367,53 @@ const prevSlide = function () {
     else (currentSlide--)
 
     goToSlide(currentSlide)
+
+    activateDot(currentSlide)
 }
+
+
+
+
+
 
 //next slide
 btnRight.addEventListener("click", nextSlide)
 
 btnLeft.addEventListener("click", prevSlide)
+
+
+
+document.addEventListener("keydown", function (e) {
+    if (e.key === "ArrowLeft") prevSlide()
+    e.key === "ArrowRight" && nextSlide()
+})
+
+
+
+//Dots
+
+
+const dotContainer = document.querySelector(".dots")
+
+const crateDots = function () {
+    slides.forEach(function (_, i) {
+        dotContainer.insertAdjacentHTML("beforeend", `<button class ="dots__dot" data-slide=${i}></button>`)
+    })
+}
+
+
+crateDots()
+
+dotContainer.addEventListener("click", function (e) {
+    if (e.target.classList.contains("dots__dot")) {
+        console.log("DOT");
+        const { slide } = e.target.dataset;
+        goToSlide(slide)
+        activateDot(slide)
+    }
+})
+
+activateDot(0)
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 //LESSONS
@@ -685,4 +744,59 @@ btnLeft.addEventListener("click", prevSlide)
 // [...h1.parentElement.children].forEach(function (el) {
 //     if (el !== h1) el.style.transform = "scale(0.5)"
 // })
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+//LIFECYCLE
+
+// DOM CONTENT LOADED
+
+//to see how fast your page load 
+
+document.addEventListener("DOMContentLoaded", function (e) {
+    console.log("HTML parsed and DOM tree build", e);
+})
+
+
+//to se when page loaded fully 
+
+window.addEventListener("load", function (e) {
+    console.log("page fully loaded", e);
+})
+
+
+
+// to see info before leaving page can use if filling form and accedently leaving page
+
+
+// window.addEventListener("beforeunload", function (e) {
+//     e.preventDefault()
+//     console.log(e);
+//     e.returnValue = ""
+// })
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+//ATRIBUTES HOW TO IMPLEMENT JAVASCRIPT FILE
+
+//there are 3 different way to add script file to html
+
+//1. simple do <script src="script.js">
+//2  we can do with async: <script async src="script.js">
+//3. we can do it with defer: <script defer src="script.js">
+
+
+//we can do it in the head and the body end and the differences between these are:
+
+//if we do 1 type in the head first it parse html when loads javascript file and only then he loads html file NEVER DO THIS
+
+
+//if we do 1 type in the body end first browser parse html then fech script and then only wen fully loaded browser execute dom content
+
+
 
